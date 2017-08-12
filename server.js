@@ -12,6 +12,7 @@ var url = "mongodb://localhost:27017/walletDatabase";
 var userInfo;
 var contractInstance;
 var accountCreated;
+var hasTrustees;
 
 // rpc start
 // geth --rpcapi eth,web3,personal --rpc
@@ -95,7 +96,11 @@ var createUser = function(user, callback) {
   deployContract(user, function(newContract) {
     if (newContract) {
       MongoClient.connect(url, function(err, db) {
-        var obj = {userAddress: user.address, contractAddress: newContract.address, setTrustees: false};
+        var obj = {
+          userAddress: user.address, 
+          contractAddress: newContract.address, 
+          hasTrustees: false
+        };
         db.collection("users").insertOne(obj);
         db.close();
         callback(newContract);
@@ -114,6 +119,7 @@ var login = function(user, callback) {
       if (result) {
         var getContract = 
         web3.eth.contract(multiSigContract[0].abi).at(result.contractAddress);
+        hasTrustees = result.hasTrustees;
         console.log("logged in");
         callback(getContract, false);
       } else {
@@ -138,8 +144,15 @@ var getBalance = function(contract) {
 }
 
 var setTrustees = function(trusteeOne, trusteeTwo) {
-
+  var ret = contractInstance.setTrustees(trusteeOne, trusteeTwo, {from: userInfo.address});
+  MongoClient.connect(url, function(err, db) {
+    var query = {userAddress: userInfo.address};
+    var update = {hasTrustees: true};
+    db.collection('users').updateOne(query, update);
+  });
+  hasTrustees = true;
 }
+
 app.use(function(req, res, next) {
   console.log('Logging...');
   next();
@@ -175,7 +188,7 @@ app.post('/', function(req, res) {
         if (getContract) {
           contractInstance = getContract;
           userInfo = user;
-          res.redirect('/login');
+          res.redirect('/wallet');
         } else {
           res.render('index', {error: 2});
         }
@@ -190,36 +203,66 @@ app.post('/', function(req, res) {
 app.get('/setTrustees', function(req, res) {
   if (!contractInstance || !userInfo) {
     res.redirect('/');
+  } else {
+    res.render('setTrustees', {accountCreated: accountCreated});
+    accountCreated = false;
   }
-  res.render('setTrustees', {accountCreated: accountCreated});
 });
 
-// app.post('/setTrustees', function(req, res) {
+app.post('/setTrustees', function(req, res) {
+  setTrustees(
+    req.body.trusteeOneAddress, 
+    req.body.trusteeTwoAddress
+    );
+  if (accountCreated) {
+    accountCreated = false;
+    res.redirect('/wallet');
+  } else {
+    res.redirect('/wallet')
+  }
+});
 
-// });
-
-app.get('/login', function(req, res) {
+app.get('/wallet', function(req, res) {
   if (!contractInstance || !userInfo) {
     res.redirect('/');
-  }
-  else {
-    let contractBalance = getBalance(contractInstance);
+  } else {
+    let walletBalance = getBalance(contractInstance);
     let accountBalance = getBalance(userInfo);
     if (accountCreated) {
       res.redirect('setTrustees');
     } else {
-      accountBalance = 'user logged in';
+      return res.render('wallet', {
+        address: userInfo.address,
+        walletBalance: walletBalance,
+        hasTrustees: hasTrustees
+      });
     }
-    return res.render('login', {
-      address: userInfo.address, 
-      accountBalance: accountBalance, 
-      contractBalance: contractBalance
-    });
-  }
+  };
 });
 
-app.post('/login', function(req, res) {
 
+app.post('/wallet', function(req, res) {
+  let walletBalance = getBalance(contractInstance);
+  if (walletBalance >= req.body.amountToSend) {
+    web3.eth.sendTransaction({
+      from: contractInstance.address, 
+      to: req.body.sendToAddress,
+      value: req.body.amountToSend
+    })
+    res.render('wallet', {
+      value: req.body.amountToSend, 
+      address: userInfo.address,
+      walletBalance: walletBalance,
+      hasTrustees: hasTrustees
+    })
+  } else {
+    res.render('wallet', {
+      error: 1,
+      address: userInfo.address,
+      walletBalance: walletBalance,
+      hasTrustees: hasTrustees
+    });
+  }
 });
   //     console.log("Logged in!");
   //   } else {

@@ -10,7 +10,13 @@ html(lang="en")
       h4.error--invalid-key Invalid Private Key
     if error == 2
       h4.error--invalid-key Can't deploy contract
-    form#landing-form(action="/", method="POST")
+    form#landing-form(action="/" method='POST')
       input#private-key(type="text" name="privateKey")
       br
-      input#landing-submit(type="submit", value="Create/Enter Wallet")
+      input#landing-submit(type="submit", value="Create/Enter Wallet", onclick='onSubmit()')
+    script.
+      function onSubmit() {
+        var form = document.getElementById('landing-form');
+        form.submit();
+        //- setTimeout(form.reset(), 70000);
+      }

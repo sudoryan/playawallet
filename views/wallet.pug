@@ -1,0 +1,30 @@
+doctype html
+html(lang="en")
+  head
+    title PlayaWallet - Your multisig wallet
+    link(rel='stylesheet' href='/css/wallet.css')
+  body
+    h1.landing--title Wallet
+    h3.landing--sub-title Balance 
+    p#wallet--balance #{walletBalance} eth
+    if (error == 1)
+      p#msg--error Not enough funds
+    if (value)
+      p#msg--success Successfully sent #{value} eth
+    div#sendFunds
+      form(action='/wallet' method='POST')
+        div#sendTo
+          span Recipient Address
+          br
+          input(type='text' name="sendToAddress")#sendTo--address
+        div#amountDiv
+          span Amount
+          br
+          input(type='number' name="amountToSend")#amountDiv--value
+        span#eth-end eth
+        br
+        input(type='submit' value='Send')#loginSubmit
+    br
+    br
+    if (!hasTrustees)
+      a(href='/setTrustees') Set Trustees

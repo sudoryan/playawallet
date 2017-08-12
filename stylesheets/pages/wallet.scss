@@ -1,0 +1,74 @@
+@import '../modules/index.scss';
+@import '../common.scss';
+@import '../partials/head.scss';
+
+.landing {
+	&--title {
+		margin: 1em 0 0 0;
+		font-size: 5em;
+		text-align: center;
+		min-width: 10em;
+	}
+	&--sub-title {
+		margin: 1em 0 0 0;
+		font-size: 2em;
+		text-align: center;
+		min-width: 25em;
+	}
+}
+
+
+#wallet {
+	&--balance {
+		margin: 1em 0 0 0;
+		font-size: 1.3em;
+		text-align: center;
+		min-width: 38em;
+	}
+}
+
+#sendFunds {
+	margin: 5em 0 0 0;
+	text-align: center;
+	min-width: 60em;
+}
+
+#amountDiv {
+	display: inline-block;
+	font-size: 1.4em;
+	margin: 0 0 0 1em;
+	&--value {
+		margin: 1em 0 0 0;
+		width: 3em;
+	}
+}
+
+#eth-end {
+	font-size: 1.4em;
+}
+#sendTo {
+	display: inline-block;
+	margin: 0 0 0 0;
+	font-size: 1.4em;
+	&--address {
+		margin: 1em 0 0 0;
+	}
+}
+
+#msg {
+	&--error {
+		text-align: center;
+		color: red;
+		margin: 3em 0 -2em 0;
+	}
+	&--success {
+		text-align: center;
+		color: green;
+		margin: 3em 0 -2em 0;
+
+	}
+}
+#loginSubmit {
+	margin: 3em 0 0 0;
+	text-align: center;
+}

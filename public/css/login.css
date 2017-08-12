@@ -479,43 +479,55 @@ pre {
   color: #ffffee;
   text-shadow: 2px 2px 0.75px #ffdbd4; }
 
-#trustee-title {
-  padding: 0 0 30px 0;
-  color: #ffffee;
-  text-shadow: 2px 2px 0.75px #ffd8d0;
-  font-size: 100px;
+.landing--title {
+  margin: 1em 0 0 0;
+  font-size: 5em;
   text-align: center;
-  min-width: 8em; }
+  min-width: 10em; }
 
-#trustee-form {
+.landing--sub-title {
+  margin: 1em 0 0 0;
+  font-size: 2em;
   text-align: center;
-  min-width: 50em; }
+  min-width: 25em; }
 
-#trustee-one {
-  display: inline-block; }
-  #trustee-one--email {
-    height: 1.4em; }
-  #trustee-one--address {
-    height: 1.4em; }
-  #trustee-one--title {
-    text-align: center;
-    font-size: 30px; }
+#wallet--balance {
+  margin: 1em 0 0 0;
+  font-size: 1.3em;
+  text-align: center;
+  min-width: 38em; }
 
-#trustee-two {
+#sendFunds {
+  margin: 5em 0 0 0;
+  text-align: center;
+  min-width: 60em; }
+
+#amountDiv {
   display: inline-block;
-  padding: 0 0 0 10em; }
-  #trustee-two--email {
-    height: 1.4em; }
-  #trustee-two--address {
-    height: 1.4em; }
-  #trustee-two--title {
-    text-align: center;
-    font-size: 30px; }
+  font-size: 1.4em;
+  margin: 0 0 0 1em; }
+  #amountDiv--value {
+    margin: 1em 0 0 0;
+    width: 3em; }
 
-#setTrustee-submit {
-  margin: 7em 0 0 0;
-  text-align: center; }
+#eth-end {
+  font-size: 1.4em; }
 
-#setTrustee-skip {
+#sendTo {
+  display: inline-block;
   margin: 0 0 0 0;
+  font-size: 1.4em; }
+  #sendTo--address {
+    margin: 1em 0 0 0; }
+
+#msg--error {
+  text-align: center;
+  color: red; }
+
+#msg--success {
+  text-align: center;
+  color: green; }
+
+#loginSubmit {
+  margin: 3em 0 0 0;
   text-align: center; }

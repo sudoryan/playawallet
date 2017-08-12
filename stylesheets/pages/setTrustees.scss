@@ -8,14 +8,15 @@
     text-shadow: 2px 2px 0.75px #ffd8d0;
     font-size: 100px;
     text-align: center;
+    min-width: 8em;
 }
 #trustee-form {
 	text-align: center;
+	min-width: 50em;
 }
 
 #trustee-one {
-	float: left;
-	margin: 0 0 0 5em;
+	display: inline-block;
 	&--email {
 		height: 1.4em;
 	}
@@ -29,8 +30,8 @@
 }
 
 #trustee-two {
-	float: right;
-	margin: 0 5em 0 0;
+	display: inline-block;
+	padding: 0 0 0 10em;
 	&--email {
 		height: 1.4em;
 	}

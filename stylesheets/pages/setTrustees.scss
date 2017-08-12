@@ -1,0 +1,55 @@
+@import '../modules/index.scss';
+@import '../common.scss';
+@import '../partials/head.scss';
+
+#trustee-title {
+	padding: 0 0 30px 0;
+    color: #ffffee;
+    text-shadow: 2px 2px 0.75px #ffd8d0;
+    font-size: 100px;
+    text-align: center;
+}
+#trustee-form {
+	text-align: center;
+}
+
+#trustee-one {
+	float: left;
+	margin: 0 0 0 5em;
+	&--email {
+		height: 1.4em;
+	}
+	&--address {
+		height: 1.4em;
+	}
+	&--title {
+		text-align: center;
+		font-size: 30px;
+	}
+}
+
+#trustee-two {
+	float: right;
+	margin: 0 5em 0 0;
+	&--email {
+		height: 1.4em;
+	}
+	&--address {
+		height: 1.4em;
+	}
+	&--title {
+		text-align: center;
+		font-size: 30px;
+
+	}
+}
+
+#setTrustee-submit {
+	margin: 7em 0 0 0;
+	text-align: center;
+}
+
+#setTrustee-skip {
+	margin: 0 0 0 0;
+	text-align: center;
+}

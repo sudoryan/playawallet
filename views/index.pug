@@ -1,0 +1,16 @@
+doctype html
+html(lang="en")
+  head
+    title PlayaWallet - Your multisig wallet
+    link(rel='stylesheet' href='/css/index.css')
+  body
+    h1.landing--title PlayaWallet
+    h3.landing--sub-title Your Multi-Signature Wallet
+    if error == 1
+      h4.error--invalid-key Invalid Private Key
+    if error == 2
+      h4.error--invalid-key Can't deploy contract
+    form#landing-form(action="/", method="POST")
+      input#private-key(type="text" name="privateKey")
+      br
+      input#landing-submit(type="submit", value="Create/Enter Wallet")

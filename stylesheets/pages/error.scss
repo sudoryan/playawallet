@@ -1,0 +1,19 @@
+@import '../modules/index.scss';
+@import '../common.scss';
+@import '../partials/head.scss';
+
+.title {
+  margin: 0 auto;
+  text-align: center;
+}
+
+.logo {
+  margin: 15px 0 0 0;
+  text-align: center;
+}
+
+.beach-ball-logo {
+	margin: 3em 0 0 1em;
+	width: 100px;
+	height: 100px;
+}

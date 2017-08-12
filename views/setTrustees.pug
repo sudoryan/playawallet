@@ -1,0 +1,33 @@
+doctype html
+html(lang="en")
+  head
+    title PlayaWallet - Your multisig wallet
+    link(rel='stylesheet' href='/css/setTrustees.css')
+  body
+    h1#trustee-title Set Trustees
+    div#trustee-form
+      form(action="/setTrustees", method="POST")
+        div#trustee-one
+          span#trustee-one--title Trustee 1
+          br
+          br
+          input#trustee-one--email(type="text", name="trusteeOneEmail" placeholder="Email")
+          br
+          br
+          input#trustee-one--address(type="text", name="trusteeOneAddress" placeholder="Address")
+        div#trustee-two
+          span#trustee-two--title Trustee 2
+          br
+          br
+          input#trustee-two--email(type="text", name="trusteeTwoEmail" placeholder="Email")
+          br
+          br
+          input#trustee-two--address(type="text", name="trusteeTwoAddress" placeholder="Address")
+        br
+        br
+        br
+        input#setTrustee-submit(type="submit", value="Submit")
+    br
+    div#setTrustee-skip
+      a(href="/transferFunds")
+        button(type="submit", name="skip") Skip

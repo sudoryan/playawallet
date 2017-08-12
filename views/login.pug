@@ -1,0 +1,18 @@
+doctype html
+html(lang="en")
+  head
+    title PlayaWallet - Your multisig wallet
+    link(rel='stylesheet' href='/css/index.css')
+  body
+    h1.landing--title Login
+    h3.landing--sub-title #{address}
+    span account balance
+    h3.landing--sub-title #{accountBalance}
+    br
+    span contract balance 
+    h3.landing--sub-title #{contractBalance}
+    form#landing-form(action="/", method="POST")
+      input#private-key(type="text", name="privateKey")
+      br
+      input#landing-submit(type="submit", value="Create/Enter Wallet")
+    a(href='/setTrustees') Set Trustees

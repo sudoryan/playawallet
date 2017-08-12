@@ -1,0 +1,46 @@
+@import '../modules/index.scss';
+@import '../common.scss';
+@import '../partials/head.scss';
+
+.landing {
+	&--title {
+		margin: 2em 0 0 0;
+		font-size: 5em;
+		text-align: center;
+	}
+	&--sub-title {
+		margin: 1em 0 0 0;
+		font-size: 1.4em;
+		text-align: center;
+	}
+}
+
+.error {
+	&--invalid-key {
+		font-size: 1em;
+		color: red;
+		text-align: center;
+		margin: 2em 0 -2em 0;
+	}
+}
+
+#landing-form {
+	text-align: center;
+	margin-top: 3em;
+}
+
+#private-key {
+	padding: 0px;
+	height: 2em;
+	width: 40vw;
+	min-width: 24em;
+	outline: none;
+	font-size: 1.3em;
+	text-align: center;
+}
+
+#landing-submit {
+	margin: 1em 0 0 0;
+	height: 2em;
+	font-size: .9em;
+}

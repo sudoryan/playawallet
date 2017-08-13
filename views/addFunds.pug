@@ -1,0 +1,26 @@
+doctype html
+html(lang="en")
+  head
+    title PlayaWallet - Your multisig wallet
+    link(rel='stylesheet' href='/css/addFunds.css')
+  body
+    include partials/head
+    h1.landing--title Add funds
+    h3.landing--sub-title Wallet Balance 
+    p#wallet--balance #{walletBalance} eth
+    div#add-funds-form
+      form(action='/addFunds' method='POST')
+        div
+          input(type='number' name="transferAmount" required)#amountDiv--value
+          span#eth-end eth
+        br
+        input(type='submit' value='Transfer')
+      br
+      if accountCreated
+        div#addFunds-skip
+          a(href="/wallet")
+            button(type="submit", name="skip") Skip
+      else
+        div#addFunds-skip
+          a(href="/wallet")
+            button(type="submit") Back

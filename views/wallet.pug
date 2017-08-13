@@ -4,6 +4,7 @@ html(lang="en")
     title PlayaWallet - Your multisig wallet
     link(rel='stylesheet' href='/css/wallet.css')
   body
+    include partials/head
     h1.landing--title Wallet
     h3.landing--sub-title Balance 
     p#wallet--balance #{walletBalance} eth
@@ -16,15 +17,17 @@ html(lang="en")
         div#sendTo
           span Recipient Address
           br
-          input(type='text' name="sendToAddress")#sendTo--address
+          input(type='text' name="sendToAddress" required)#sendTo--address
         div#amountDiv
           span Amount
           br
-          input(type='number' name="amountToSend")#amountDiv--value
+          input(type='number' name="amountToSend" required)#amountDiv--value
         span#eth-end eth
         br
         input(type='submit' value='Send')#loginSubmit
     br
     br
     if (!hasTrustees)
-      a(href='/setTrustees') Set Trustees
+      a(href='/setTrustees')#setTrustees Set Trustees
+    a(href='/addFunds')#addFunds Add Funds
+    a(href='/wallet')#verifyCivic Verify with Civic

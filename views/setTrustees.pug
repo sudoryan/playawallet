@@ -4,6 +4,7 @@ html(lang="en")
     title PlayaWallet - Your multisig wallet
     link(rel='stylesheet' href='/css/setTrustees.css')
   body
+    include partials/head
     div
       h1#trustee-title Set Trustees
       div#trustee-form
@@ -31,7 +32,7 @@ html(lang="en")
     br
     if accountCreated
       div#setTrustee-skip
-        a(href="/wallet")
+        a(href="/addFunds")
           button(type="submit", name="skip") Skip
     else
       div#setTrustee-skip

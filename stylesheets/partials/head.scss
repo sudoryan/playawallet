@@ -1,14 +1,14 @@
 @import '../modules/index.scss';
 
 #menu-bar {
-  margin: 5em 0 0 0;
 }
 
-.menu-link {
-  float: right;
-  margin: 0 1em 0 2em;
-  font-size: 2em;
-  color: #ffffee;
-  text-shadow: 2px 2px 0.75px #ffdbd4;
+#title {
+	font-size: 3em;
+}
 
+#logout {
+	font-size: 1em;
+	float: right;
+	margin: 1em 1em 0 0;
 }

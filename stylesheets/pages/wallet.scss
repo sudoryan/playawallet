@@ -7,13 +7,13 @@
 		margin: 1em 0 0 0;
 		font-size: 5em;
 		text-align: center;
-		min-width: 10em;
+		min-width: 12em;
 	}
 	&--sub-title {
 		margin: 1em 0 0 0;
 		font-size: 2em;
 		text-align: center;
-		min-width: 25em;
+		min-width: 30em;
 	}
 }
 
@@ -23,7 +23,7 @@
 		margin: 1em 0 0 0;
 		font-size: 1.3em;
 		text-align: center;
-		min-width: 38em;
+		min-width: 46em;
 	}
 }
 
@@ -68,7 +68,20 @@
 
 	}
 }
+
 #loginSubmit {
 	margin: 3em 0 0 0;
 	text-align: center;
+}
+
+#setTrustees {
+
+}
+
+#addFunds {
+	margin: 0 0 0 2em;
+}
+
+#verifyCivic {
+	margin: 0 0 0 2em;
 }

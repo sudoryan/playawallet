@@ -147,8 +147,10 @@ var setTrustees = function(trusteeOne, trusteeTwo) {
   var ret = contractInstance.setTrustees(trusteeOne, trusteeTwo, {from: userInfo.address});
   MongoClient.connect(url, function(err, db) {
     var query = {userAddress: userInfo.address};
-    var update = {hasTrustees: true};
-    db.collection('users').updateOne(query, update);
+    db.collection('users').findOne(query).then(function(result) {
+      result.hasTrustees = true;
+      db.collection('users').update(query, result);
+    });
   });
   hasTrustees = true;
 }
@@ -205,7 +207,6 @@ app.get('/setTrustees', function(req, res) {
     res.redirect('/');
   } else {
     res.render('setTrustees', {accountCreated: accountCreated});
-    accountCreated = false;
   }
 });
 
@@ -215,8 +216,7 @@ app.post('/setTrustees', function(req, res) {
     req.body.trusteeTwoAddress
     );
   if (accountCreated) {
-    accountCreated = false;
-    res.redirect('/wallet');
+    res.redirect('/addFunds');
   } else {
     res.redirect('/wallet')
   }
@@ -244,15 +244,13 @@ app.get('/wallet', function(req, res) {
 app.post('/wallet', function(req, res) {
   let walletBalance = getBalance(contractInstance);
   if (walletBalance >= req.body.amountToSend) {
-    web3.eth.sendTransaction({
-      from: contractInstance.address, 
-      to: req.body.sendToAddress,
-      value: req.body.amountToSend
-    })
+    contractInstance.transfer(req.body.sendToAddress, req.body.amountToSend, {
+        from: userInfo.address
+      })
     res.render('wallet', {
       value: req.body.amountToSend, 
       address: userInfo.address,
-      walletBalance: walletBalance,
+      walletBalance: walletBalance - req.body.amountToSend,
       hasTrustees: hasTrustees
     })
   } else {
@@ -263,6 +261,28 @@ app.post('/wallet', function(req, res) {
       hasTrustees: hasTrustees
     });
   }
+});
+
+app.get('/addFunds', function(req, res) {
+  if (!contractInstance || !userInfo) {
+    res.redirect('/');
+  } else {
+    let walletBalance = getBalance(contractInstance);
+    res.render('addFunds', {
+      walletBalance: walletBalance,
+      accountCreated: accountCreated
+    });
+    accountCreated = false;
+  }
+});
+
+app.post('/addFunds', function(req, res) {
+  web3.eth.sendTransaction({
+    to: contractInstance.address, 
+    from: userInfo.address, 
+    value: req.body.transferAmount
+  });
+  res.redirect('addFunds');
 });
   //     console.log("Logged in!");
   //   } else {

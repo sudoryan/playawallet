@@ -478,35 +478,32 @@ pre {
   margin: 1em 1em 0 0; }
 
 .landing--title {
-  margin: 2em 0 0 0;
+  margin: 1em 0 0 0;
   font-size: 5em;
-  text-align: center; }
+  text-align: center;
+  min-width: 10em; }
 
 .landing--sub-title {
   margin: 1em 0 0 0;
-  font-size: 1.4em;
-  text-align: center; }
-
-.error--invalid-key {
-  font-size: 1em;
-  color: red;
+  font-size: 2em;
   text-align: center;
-  margin: 2em 0 -2em 0; }
+  min-width: 25em; }
 
-#landing-form {
-  text-align: center;
-  margin-top: 3em; }
-
-#private-key {
-  padding: 0px;
-  height: 2em;
-  width: 40vw;
-  min-width: 24em;
-  outline: none;
+#wallet--balance {
+  margin: 1em 0 0 0;
   font-size: 1.3em;
-  text-align: center; }
+  text-align: center;
+  min-width: 38em; }
 
-#landing-submit {
-  margin: 2.4em 0 0 0;
-  height: 2em;
-  font-size: .9em; }
+#add-funds-form {
+  text-align: center;
+  margin: 2em 0 0 0;
+  min-width: 50em; }
+
+#amountDiv--value {
+  margin: 2em .5em 2em 0;
+  width: 3em; }
+
+#addFunds-skip {
+  margin: 0 0 0 0;
+  text-align: center; }

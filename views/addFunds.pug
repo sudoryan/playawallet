@@ -11,7 +11,7 @@ html(lang="en")
     div#add-funds-form
       form(action='/addFunds' method='POST')
         div
-          input(type='number' name="transferAmount" required)#amountDiv--value
+          input(type='number' name="transferAmount" min="0" required)#amountDiv--value
           span#eth-end eth
         br
         input(type='submit' value='Transfer')

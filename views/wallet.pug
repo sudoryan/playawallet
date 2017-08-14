@@ -27,7 +27,8 @@ html(lang="en")
         input(type='submit' value='Send')#loginSubmit
     br
     br
-    if (!hasTrustees)
-      a(href='/setTrustees')#setTrustees Set Trustees
-    a(href='/addFunds')#addFunds Add Funds
-    a(href='/wallet')#verifyCivic Verify with Civic
+    div#footer
+      if (!setTrustees)
+        a(href='/setTrustees')#setTrustees Set Trustees
+      a(href='/addFunds')#addFunds Add Funds
+      a(href='/wallet')#verifyCivic Verify with Civic

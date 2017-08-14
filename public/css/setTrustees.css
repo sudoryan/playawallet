@@ -469,6 +469,9 @@ pre {
   width: 40rem;
   font-family: monospace; }
 
+#menu-bar {
+  min-width: 50em; }
+
 #title {
   font-size: 3em; }
 
@@ -514,5 +517,5 @@ pre {
   text-align: center; }
 
 #setTrustee-skip {
-  margin: 0 0 0 0;
+  margin: 1em 0 0 0;
   text-align: center; }

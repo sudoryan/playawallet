@@ -469,6 +469,9 @@ pre {
   width: 40rem;
   font-family: monospace; }
 
+#menu-bar {
+  min-width: 50em; }
+
 #title {
   font-size: 3em; }
 
@@ -539,6 +542,6 @@ pre {
   margin: 0 0 0 2em; }
 
 #footer {
-  position: fixed;
-  bottom: 0;
-  padding: 0 0 1em 1.2em; }
+  position: absolute;
+  text-align: bottom;
+  padding: 2em 0 1em 1.2em; }

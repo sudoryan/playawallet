@@ -469,6 +469,9 @@ pre {
   width: 40rem;
   font-family: monospace; }
 
+#menu-bar {
+  min-width: 50em; }
+
 #title {
   font-size: 3em; }
 

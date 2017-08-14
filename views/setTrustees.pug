@@ -29,12 +29,13 @@ html(lang="en")
           br
           br
           input#setTrustee-submit(type="submit", value="Submit")
-    br
-    if accountCreated
-      div#setTrustee-skip
-        a(href="/addFunds")
-          button(type="submit", name="skip") Skip
-    else
-      div#setTrustee-skip
-        a(href="/wallet")
-          button(type="submit") Back
+          br
+          if accountCreated
+            div#setTrustee-skip
+              a(href="/addFunds")
+                button(type="button", name="skip") Skip
+          else
+            div#setTrustee-skip
+              a(href="/wallet")
+                button(type="button") Back
+      

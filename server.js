@@ -10,6 +10,7 @@ var session = require('express-session');
 var login = require('./login');
 var contract = require('./contract');
 
+// protect sessions
 app.use(session({
   secret: 'super secret',
   resave: false,
@@ -77,12 +78,14 @@ app.get('/wallet', function(req, res) {
     res.redirect('/');
   } else {
     req.session.accountCreated = false;
-    let accountBalance = contract.getBalance(req.session.userInfo.address);
-    res.render('wallet', {
-      address: req.session.userInfo.address,
-      walletBalance: contract.getBalance(req.session.contractAddress),
-      setTrustees: req.session.setTrustees
-    });
+    contract.getBalance(req.session.contractAddress)
+      .then(function(walletBalance) {
+        res.render('wallet', {
+          address: req.session.userInfo.address,
+          walletBalance: walletBalance,
+          setTrustees: req.session.setTrustees
+        });
+      });
   }
 });
 
@@ -94,7 +97,7 @@ app.post('/wallet', function(req, res) {
         address: req.session.userInfo.address,
         walletBalance: walletBalance,
         setTrustees: req.session.setTrustees
-      })
+      });
     })
     .catch(function(walletBalance) {
       res.render('wallet', {
@@ -102,19 +105,21 @@ app.post('/wallet', function(req, res) {
         address: req.session.userInfo.address,
         walletBalance: walletBalance,
         setTrustees: req.session.setTrustees
+      });
     });
-  });
 });
 
 app.get('/addFunds', function(req, res) {
   if (!req.session.userInfo || !req.session.contractAddress) {
     res.redirect('/');
   } else {
-    let walletBalance = contract.getBalance(req.session.contractAddress);
-      res.render('addFunds', {
-        walletBalance: walletBalance,
-        accountCreated: req.session.accountCreated
-      });
+      contract.getBalance(req.session.contractAddress)
+        .then(function(walletBalance) {
+          res.render('addFunds', {
+            walletBalance: walletBalance,
+            accountCreated: req.session.accountCreated
+          });          
+        });
     }
 });
 

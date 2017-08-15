@@ -36,38 +36,49 @@ var deploy = function(user) {
 }
 
 var getBalance = function(address) {
-  let balance = web3.eth.getBalance(address);
-  return (balance);
+  return new Promise(function(res, err) {
+    balance = web3.eth.getBalance(address);
+    res(balance);    
+  });
 }
 
 var transfer = function(req) {
   return new Promise(function(res, err) {
-    let contractInstance = getInstance(req.session.contractAddress);
-    let walletBalance = getBalance(req.session.contractAddress);
-    if (walletBalance >= req.body.amountToSend) {
-      contractInstance.transfer(
-        req.body.sendToAddress, 
-        req.body.amountToSend, {
-        from: req.session.userInfo.address
-      })
-      res(walletBalance - req.body.amountToSend);
-    } else {
-      err(walletBalance);
-    }
+    getInstance(req.session.contractAddress)
+      .then(function(contractInstance) {
+        getBalance(req.session.contractAddress)
+          .then(function(walletBalance) {
+            if (parseInt(walletBalance) >= parseInt(req.body.amountToSend)) {
+              contractInstance.transfer(
+                req.body.sendToAddress, 
+                req.body.amountToSend, {
+                from: req.session.userInfo.address
+              });
+              res(parseInt(walletBalance) - parseInt(req.body.amountToSend));
+            } else {
+              err(walletBalance);
+            }       
+          });
+      });
   });
 }
 
 var getInstance = function(contractAddress) {
-  return web3.eth.contract(multiSigContract[0].abi).at(contractAddress);
+  return new Promise(function(res, err) {
+    var instance = web3.eth.contract(multiSigContract[0].abi).at(contractAddress);
+    res(instance);
+  });
 }
 
 var setTrustees = function(session, trusteeOne, trusteeTwo) {
-  let contractInstance = getInstance(session.contractAddress);
-  var ret = contractInstance.setTrustees(trusteeOne, trusteeTwo, {
-    from: session.userInfo.address
-  });
-  db.setTrusteesTrue(session.userInfo);
-  session.setTrustees = true;
+  getInstance(session.contractAddress)
+    .then(function(contractInstance) {
+      contractInstance.setTrustees(trusteeOne, trusteeTwo, {
+        from: session.userInfo.address
+      });
+      db.setTrusteesTrue(session.userInfo);
+      session.setTrustees = true;
+    });
 }
 
 var addFunds = function(req) {

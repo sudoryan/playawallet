@@ -8,11 +8,11 @@ html(lang="en")
     h1.landing--title Wallet
     h3.landing--sub-title Balance 
     p#wallet--balance #{walletBalance} eth
-    if (error == 1)
-      p#msg--error Not enough funds
-    if (value)
-      p#msg--success Successfully sent #{value} eth
     div#sendFunds
+      if (error == 1)
+        p#msg--error Not enough funds
+      if (value)
+        p#msg--success Successfully sent #{value} eth
       form(action='/wallet' method='POST')
         div#sendTo
           span Recipient Address
